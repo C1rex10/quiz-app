@@ -141,7 +141,7 @@ def admin_qrcode():
     pasta = os.path.join("static", "qrcodes")
     os.makedirs(pasta, exist_ok=True)
 
-    dominio = "https://quizyesconnect-gkd8g3fpacaxa0cu.brazilsouth-01.azurewebsites.net"
+    dominio = "https://diogo.pythonanywhere.com"
     link = f"{dominio}/quiz/start"
 
     img = qrcode.make(link)
@@ -153,7 +153,7 @@ def admin_qrcode():
 
 @app.route("/")
 def home():
-    return "App Flask funcionando no Azure!"
+    return "App Flask funcionando no PythonAnywhere 🚀"
 
 
 @app.route("/admin")
@@ -203,11 +203,12 @@ def add():
     return render_template("add.html")
 
 
-# 🚀 Ajuste para Azure
+# 🚀 Ajuste para PythonAnywhere
+init_db()
+
 if __name__ == "__main__":
-    init_db()
-    # No local pode rodar Flask direto
     app.run(host="0.0.0.0", port=5000, debug=True)
+
 else:
     # No Azure, inicializa DB também
     init_db()
