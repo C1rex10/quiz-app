@@ -74,13 +74,12 @@ def get_all_ids():
 def quiz(num):
     total = get_total_perguntas()
 
-    # primeira pergunta → gerar ordem aleatória e limpar sessão
     if num == 1:
         ids = get_all_ids()
         random.shuffle(ids)
         session["ordem"] = ids
         session["score"] = 0
-        session["respostas"] = []  # guarda histórico
+        session["respostas"] = []
 
     ordem = session.get("ordem", [])
     if num > len(ordem):
@@ -90,7 +89,6 @@ def quiz(num):
     if not pergunta:
         return "Pergunta não encontrada!", 404
 
-    # embaralhar alternativas
     opcoes = pergunta["opcoes"][:]
     random.shuffle(opcoes)
 
@@ -98,7 +96,6 @@ def quiz(num):
         resposta = request.form.get("resposta")
         correta = pergunta["resposta"]
 
-        # salva no histórico
         session["respostas"].append({
             "pergunta": pergunta["texto"],
             "resposta_usuario": resposta,
@@ -138,15 +135,12 @@ def quiz_start():
     return render_template("quiz_start.html")
 
 
-
-
 # ---------------------
 @app.route("/admin/qrcode")
 def admin_qrcode():
     pasta = os.path.join("static", "qrcodes")
     os.makedirs(pasta, exist_ok=True)
 
-    # 🔹 Domínio fixo do Azure
     dominio = "https://quizyesconnect-gkd8g3fpacaxa0cu.brazilsouth-01.azurewebsites.net"
     link = f"{dominio}/quiz/start"
 
@@ -156,10 +150,11 @@ def admin_qrcode():
 
     return render_template("qrcode.html", caminho="qrcodes/quiz.png")
 
-# ---------------------
+
 @app.route("/")
 def home():
     return "App Flask funcionando no Azure!"
+
 
 @app.route("/admin")
 def admin():
@@ -177,7 +172,6 @@ def resultado_quiz(total):
     respostas = session.get("respostas", [])
     nome = session.get("nome", "Participante")
 
-    # Salvar no ranking
     conn = sqlite3.connect(DB_NAME)
     cur = conn.cursor()
     cur.execute("INSERT INTO resultados (nome, score, total) VALUES (?, ?, ?)",
@@ -208,7 +202,12 @@ def add():
         return redirect(url_for("admin"))
     return render_template("add.html")
 
+
+# 🚀 Ajuste para Azure
 if __name__ == "__main__":
     init_db()
-    # importante: aceita conexões externas
+    # No local pode rodar Flask direto
     app.run(host="0.0.0.0", port=5000, debug=True)
+else:
+    # No Azure, inicializa DB também
+    init_db()
