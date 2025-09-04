@@ -138,18 +138,26 @@ def quiz_start():
     return render_template("quiz_start.html")
 
 
+
 # ---------------------
-# QR CODE ÚNICO
+# QR CODE ÚNICO (Azure)
 # ---------------------
 @app.route("/admin/qrcode")
 def admin_qrcode():
     pasta = os.path.join("static", "qrcodes")
     os.makedirs(pasta, exist_ok=True)
-    link = "http://127.0.0.1:5000/quiz/start"
+
+    # 🔹 Domínio fixo do Azure
+    dominio = "https://quizyesconnect-gkd8g3fpacaxa0cu.brazilsouth-01.azurewebsites.net"
+    link = f"{dominio}/quiz/start"
+
     img = qrcode.make(link)
     caminho = os.path.join(pasta, "quiz.png")
     img.save(caminho)
+
     return render_template("qrcode.html", caminho="qrcodes/quiz.png")
+
+
 
 
 # ---------------------
@@ -209,4 +217,5 @@ def add():
 
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True)
+    # importante: aceita conexões externas
+    app.run(host="0.0.0.0", port=5000, debug=True)
