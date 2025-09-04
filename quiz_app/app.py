@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3, qrcode, os
 
 app = Flask(__name__)
-app.secret_key = "chave_secreta"  # necessário para usar sessão
+app.secret_key = "chave_secreta"
 DB_NAME = "quiz.db"
 
 # ---------------------
@@ -139,8 +139,7 @@ def quiz_start():
 
 
 
-# ---------------------
-# QR CODE ÚNICO (Azure)
+
 # ---------------------
 @app.route("/admin/qrcode")
 def admin_qrcode():
@@ -157,11 +156,6 @@ def admin_qrcode():
 
     return render_template("qrcode.html", caminho="qrcodes/quiz.png")
 
-
-
-
-# ---------------------
-# ADMIN
 # ---------------------
 @app.route("/")
 def home():
