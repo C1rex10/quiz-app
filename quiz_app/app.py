@@ -159,8 +159,7 @@ def admin_qrcode():
 # ---------------------
 @app.route("/")
 def home():
-    # redireciona para o painel do admin
-    return redirect(url_for("admin"))
+    return "App Flask funcionando no Azure!"
 
 @app.route("/admin")
 def admin():
