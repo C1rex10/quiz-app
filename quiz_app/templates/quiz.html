@@ -1,0 +1,13 @@
+<h1>Responda ao Quiz</h1>
+<form method="POST">
+    {% for p in perguntas %}
+        <div style="margin-bottom:20px;">
+            <h3>{{ p[1] }}</h3>
+            <input type="radio" name="pergunta_{{p[0]}}" value="{{p[2]}}" required> {{p[2]}}<br>
+            <input type="radio" name="pergunta_{{p[0]}}" value="{{p[3]}}" required> {{p[3]}}<br>
+            <input type="radio" name="pergunta_{{p[0]}}" value="{{p[4]}}" required> {{p[4]}}<br>
+            <input type="radio" name="pergunta_{{p[0]}}" value="{{p[5]}}" required> {{p[5]}}<br>
+        </div>
+    {% endfor %}
+    <button type="submit">Enviar Respostas</button>
+</form>

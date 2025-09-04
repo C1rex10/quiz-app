@@ -1,0 +1,11 @@
+<h1>Editar Pergunta</h1>
+<form method="POST">
+    Pergunta: <input type="text" name="texto" value="{{ pergunta.texto }}" required><br><br>
+    Opção 1: <input type="text" name="op1" value="{{ pergunta.opcoes[0] }}" required><br>
+    Opção 2: <input type="text" name="op2" value="{{ pergunta.opcoes[1] }}" required><br>
+    Opção 3: <input type="text" name="op3" value="{{ pergunta.opcoes[2] }}" required><br><br>
+    Opção 4: <input type="text" name="op4" value="{{pergunta.opcoes[3] }}" required><br><br>
+    Resposta correta: <input type="text" name="resposta" value="{{ pergunta.resposta }}" required><br><br>
+    <button type="submit">Salvar</button>
+</form>
+<a href="{{ url_for('admin') }}">⬅️ Voltar</a>

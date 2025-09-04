@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pergunta {{ num }} - Quiz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+        .container {
+            margin-top: 60px;
+            max-width: 800px;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .opcao {
+            text-align: left;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .opcao:hover {
+            background: #f1f1f1;
+        }
+        .btn {
+            border-radius: 8px;
+        }
+        .timer {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>📌 Pergunta {{ num }} de {{ total }}</h4>
+            <div class="timer">⏳ Tempo: <span id="tempo">40</span>s</div>
+        </div>
+
+        <p><b>{{ pergunta.texto }}</b></p>
+
+        <form method="POST" id="quizForm">
+            {% for opcao in opcoes %}
+            <div class="form-check opcao">
+                <input class="form-check-input" type="radio" name="resposta" value="{{ opcao }}" id="op{{ loop.index }}">
+                <label class="form-check-label" for="op{{ loop.index }}">
+                    {{ opcao }}
+                </label>
+            </div>
+            {% endfor %}
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    {% if num < total %}➡ Próxima{% else %}✅ Finalizar{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let tempo = 40; // segundos por pergunta
+    const tempoSpan = document.getElementById("tempo");
+    const form = document.getElementById("quizForm");
+
+    const timer = setInterval(() => {
+        tempo--;
+        tempoSpan.textContent = tempo;
+        if (tempo <= 0) {
+            clearInterval(timer);
+            form.submit(); // envia automaticamente
+        }
+    }, 1000);
+</script>
+</body>
+</html>

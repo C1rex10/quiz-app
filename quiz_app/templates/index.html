@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz - QR Codes</title>
+</head>
+<body>
+    <h1>Quiz - Escaneie um QR Code</h1>
+    <ul>
+        {% for p in perguntas %}
+            <li>
+                Pergunta {{ p[0] }}: {{ p[1] }} <br>
+                <img src="{{ url_for('static', filename='qrcodes/pergunta_' ~ p[0] ~ '.png') }}" width="150">
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

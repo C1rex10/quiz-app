@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pergunta {{ id }}</title>
+</head>
+<body>
+    <h2>{{ pergunta.texto }}</h2>
+    <h2>{{ pergunta.texto }}</h2>
+    <form method="POST">
+        {% for opcao in pergunta.opcoes %}
+            <input type="radio" name="resposta" value="{{ opcao }}" required> {{ opcao }}<br>
+        {% endfor %}
+        <button type="submit">Responder</button>
+    </form>
+
+</body>
+</html>

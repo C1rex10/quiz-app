@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado</title>
+</head>
+<body>
+    {% if acertou %}
+        <h2>✅ Parabéns! Você acertou.</h2>
+    {% else %}
+        <h2>❌ Você errou.</h2>
+        <p>A resposta correta era: {{ correta }}</p>
+    {% endif %}
+    <a href="/">Voltar</a>
+</body>
+</html>

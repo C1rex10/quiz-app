@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Pergunta - Quiz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+        .container {
+            margin-top: 40px;
+            max-width: 700px;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .form-control {
+            border-radius: 8px;
+        }
+        .btn {
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card p-4">
+        <h2 class="text-center mb-4">➕ Cadastrar Nova Pergunta</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Texto da Pergunta</label>
+                <textarea name="texto" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Alternativa 1</label>
+                <input type="text" name="op1" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Alternativa 2</label>
+                <input type="text" name="op2" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Alternativa 3</label>
+                <input type="text" name="op3" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Alternativa 4</label>
+                <input type="text" name="op4" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Resposta Correta</label>
+                <select name="resposta" class="form-select" required>
+                    <option value="">Selecione...</option>
+                    <option value="op1">Alternativa 1</option>
+                    <option value="op2">Alternativa 2</option>
+                    <option value="op3">Alternativa 3</option>
+                    <option value="op4">Alternativa 4</option>
+                </select>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary px-4">Salvar Pergunta</button>
+                <a href="{{ url_for('admin') }}" class="btn btn-secondary px-4">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<h1>QR Code da Pergunta {{ id }}</h1>
+<p>Escaneie este QR Code para responder:</p>
+<img src="{{ url_for('static', filename=caminho) }}" width="200">
+<br><br>
+<a href="{{ url_for('admin') }}">⬅️ Voltar</a>
